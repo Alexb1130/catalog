@@ -6,7 +6,7 @@ export default {
 		"productCategories",
 		"allFilteredProducts"
 	]),
-	methods: mapMutations(["filteredCategories", "orderByName", "orderByPrice"])
+	methods: mapMutations(["filteredCategories", "orderBy"])
 };
 </script>
 <template>
@@ -23,9 +23,9 @@ export default {
 			</option>
 		</select>
 		<b>По алфавиту: </b>
-		<input type="checkbox" @change="orderByName" />
+		<input type="radio" name="sort" value="name" @change="orderBy" />
 		<b>По цене: </b>
-		<input type="checkbox" @change="orderByPrice" />
+		<input type="radio" name="sort" value="price" @change="orderBy" />
 	</div>
 </template>
 <style scoped>

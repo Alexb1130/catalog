@@ -1,4 +1,4 @@
-import { orderBy } from 'lodash'
+import _ from 'lodash'
 
 const _adaptationProductsStructure = products => {
     const adaptedProducts = []
@@ -13,16 +13,6 @@ const _adaptationProductsStructure = products => {
     })
 
     return adaptedProducts
-}
-
-const _orderBy = (state, event, field) => {
-    let orderType = event.target.checked ? 'desc' : 'asc';
-
-    if (state.filteredProducts.length) {
-        state.filteredProducts = orderBy(state.filteredProducts, field, orderType);
-    }
-
-    state.products = orderBy(state.products, field, orderType);
 }
 
 export default {
@@ -51,11 +41,14 @@ export default {
         filteredCategories(state, event) {
             state.filteredProducts = state.products.filter(el => el.group.name === event.target.value)
         },
-        orderByName(state, event) {
-            _orderBy(state, event, 'name')
-        },
-        orderByPrice(state, event) {
-            _orderBy(state, event, 'price')
+        orderBy(state, event) {
+            let orderType = event.target.value === 'name' ? 'asc' : 'desc';
+
+            if (state.filteredProducts.length) {
+                state.filteredProducts = _.orderBy(state.filteredProducts, event.target.value, orderType);
+            }
+
+            state.products = _.orderBy(state.products, event.target.value, orderType);
         }
     },
     getters: {
