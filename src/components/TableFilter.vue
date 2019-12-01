@@ -22,15 +22,26 @@ export default {
 				{{ category.name }}
 			</option>
 		</select>
-		<b>По алфавиту: </b>
-		<input type="radio" name="sort" value="name" @change="orderBy" />
-		<b>По цене: </b>
-		<input type="radio" name="sort" value="price" @change="orderBy" />
+		<b>Сортировать: </b>
+		<label for="sort-name">По именам</label>
+		<input type="checkbox" id="sort-name" name="sort" value="name" @change="orderBy" />
+		<label for="sort-price">По цене</label>
+		<input type="checkbox" id="sort-price" name="sort" value="price" @change="orderBy" />
 	</div>
 </template>
 <style scoped>
 input {
-	display: inline-block;
+	display: none;
+}
+label {
+	font-size: 14px;
 	margin: 10px;
+	cursor: pointer;
+}
+label:hover {
+	opacity: .7;
+}
+label:active {
+	opacity: .5;
 }
 </style>

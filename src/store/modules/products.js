@@ -41,14 +41,21 @@ export default {
         filteredCategories(state, event) {
             state.filteredProducts = state.products.filter(el => el.group.name === event.target.value)
         },
-        orderBy(state, event) {
-            let orderType = event.target.value === 'name' ? 'asc' : 'desc';
+        orderBy(state, { target }) {
 
-            if (state.filteredProducts.length) {
-                state.filteredProducts = _.orderBy(state.filteredProducts, event.target.value, orderType);
+            let orderType;
+
+            if (target.value === 'name') {
+                orderType = target.checked ? 'asc' : 'desc';
+            } else {
+                orderType = target.checked ? 'desc' : 'asc';
             }
 
-            state.products = _.orderBy(state.products, event.target.value, orderType);
+            if (state.filteredProducts.length) {
+                state.filteredProducts = _.orderBy(state.filteredProducts, target.value, orderType);
+            }
+
+            state.products = _.orderBy(state.products, target.value, orderType);
         }
     },
     getters: {
